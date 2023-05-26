@@ -1,7 +1,5 @@
-
-import { IonIcon } from '@ionic/react'
+import { IoDocumentOutline, IoAlbumsOutline, IoSquareOutline } from 'react-icons/io5';
 import { useEffect, useState, useRef } from 'react'
-
 export function Aside() {
 
     const [notes, setNotes] = useState([])
@@ -33,7 +31,7 @@ export function Aside() {
                 if (!note.textContent.toLocaleLowerCase().includes(quickFindLowerCase)) {
                     noteParent.style.display = 'none'
                 } else {
-                    noteParent.style.display = 'block'
+                    noteParent.style.display = 'flex'
                 }
             }
         })
@@ -49,7 +47,11 @@ export function Aside() {
                         <h3>Username</h3>
                     </section>
                     <section className="quick-find">
-                        <input type="text" id='quick-find' ref={quickFindRef} placeholder="Busca rápida CTRL + F" />
+                        <input type="text" id='quick-find' ref={quickFindRef} placeholder="Busca rápida" />
+                        <span className='command-tip'>
+                            <IoSquareOutline />
+                            <p>F</p>
+                        </span>
                     </section>
 
                     <h3>Todas as notas (*)</h3>
@@ -57,8 +59,8 @@ export function Aside() {
                     <ul className='note-list'>
                         {
                             notes.map(note => {
-                                return <li>
-                                    <IonIcon name='document-outline' />
+                                return <li key={note}>
+                                    <IoDocumentOutline />
                                     <p>{note}</p>
                                 </li>
                             })
