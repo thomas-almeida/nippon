@@ -1,9 +1,14 @@
+import { Aside } from "./components/aside"
 
+import { View } from "./components/view"
 
 function App() {
   return (
     <>
-      <h1>Nippon</h1>
+      <main>
+        <Aside />
+        <View />
+      </main>
     </>
   )
 }
