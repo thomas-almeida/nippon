@@ -1,5 +1,15 @@
+@import url(fonts.css);
 * {
     margin: 0px;
     padding: 0px;
     font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #fff;
+}
+
+main {
+    display: flex;
 }
