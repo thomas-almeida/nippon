@@ -1,0 +1,54 @@
+aside ul {
+    padding: 10px 0px;
+    list-style: none;
+}
+
+aside li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0px;
+    padding: 10px 0px;
+    cursor: pointer;
+}
+
+.quick-find {
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.quick-find input {
+    width: 100%;
+    padding: 8px;
+    background-color: #121212;
+    box-shadow: 0px 0px 8px #121212;
+    border: 1px solid #2d2d2d;
+    outline: none;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: #fff;
+    margin: 20px 0px;
+}
+
+.command-tip {
+    background-color: #181818;
+    padding: 3px 5px;
+    position: absolute;
+    top: 35px;
+    right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 8px #121212;
+    color: #8c8c8c;
+}
+
+.command-tip p {
+    font-size: 0.85em;
+    font-weight: 700;
+}

@@ -1,4 +1,6 @@
 @import url(fonts.css);
+@import url(aside.css);
+@import url(view.css);
 * {
     margin: 0px;
     padding: 0px;
@@ -12,4 +14,18 @@ body {
 
 main {
     display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+aside {
+    width: 15%;
+    background-color: #181818;
+    padding: 15px;
+}
+
+.view {
+    width: 85%;
+    padding: 20px;
 }

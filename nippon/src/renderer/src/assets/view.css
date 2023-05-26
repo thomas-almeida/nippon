@@ -1,0 +1,120 @@
+.view {
+    position: relative;
+}
+
+.actions {
+    padding: 10px;
+    top: 15px;
+    display: flex;
+    background-color: #181818;
+    position: absolute;
+    right: 40px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px #161616;
+}
+
+.actions svg {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.editor-preview {
+    padding: 20px;
+    margin-top: 40px;
+    height: 80vh;
+    width: 95%;
+    display: flex;
+    gap: 10px;
+}
+
+.editor {
+    width: 50%;
+    background-color: #181818;
+    border-radius: 4px;
+    box-shadow: 0px 0px 4px #101010;
+    padding: 10px;
+    overflow-y: auto;
+    transition: 0.3s;
+}
+
+.editor:hover {
+    transform: scale(1.02);
+}
+
+.preview {
+    width: 50%;
+    border-radius: 4px;
+    overflow-y: auto;
+    padding: 20px;
+    font-size: 1em;
+}
+
+.preview img {
+    width: 100%;
+    box-shadow: 0px 0px 8px #1c1c1c;
+    border-radius: 3px;
+}
+
+.preview h1,
+h2,
+h3 {
+    padding: 10px 0px;
+}
+
+.preview a {
+    text-decoration: none;
+    color: dodgerblue;
+    letter-spacing: 0.5px;
+}
+
+.preview li>ul {
+    padding: 10px 20px;
+}
+
+.ͼ15,
+.cm-gutters {
+    background-color: transparent;
+}
+
+.ͼ3 .cm-gutters {
+    background: transparent;
+    color: #525252;
+    font-weight: 600;
+}
+
+.ͼ1.cm-focused {
+    outline: none;
+}
+
+.ͼ15 .cm-activeLineGutter {
+    background: transparent;
+}
+
+.ͼ15 .cm-activeLine {
+    background-color: rgb(255 255 255 / 2%);
+}
+
+.ͼ1 .cm-scroller {
+    display: flex !important;
+    /* align-items: flex-start !important; */
+    font-family: monospace;
+    line-height: none;
+    height: 100%;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 0;
+    white-space: pre-line;
+    word-break: break-all;
+}
+
+.cm-activeLine.cm-line {
+    white-space: pre-line;
+    word-break: break-all;
+}
+
+.ͼ19 {
+    color: rgb(0, 128, 255);
+    font-weight: 500;
+    letter-spacing: 1px;
+}
