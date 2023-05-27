@@ -29,3 +29,15 @@ aside {
     width: 85%;
     padding: 20px;
 }
+
+@media only screen and (max-width: 1600px) {
+    .editor-preview {
+        max-width: 1200px;
+    }
+}
+
+@media only screen and (max-width: 1450px) {
+    .editor-preview {
+        max-width: 1000px;
+    }
+}
