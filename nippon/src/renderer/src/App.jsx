@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from 'react';
-import { IoDocumentOutline, IoSquareOutline } from 'react-icons/io5';
-import { IoEyeOutline, IoCopyOutline, IoBookmarkOutline, IoEyeOffOutline } from 'react-icons/io5';
+
+import { IoEyeOutline, IoDocumentOutline, IoCopyOutline, IoBookmarkOutline, IoAdd } from 'react-icons/io5';
 import ReactMarkdown from 'react-markdown'
 import 'prismjs/themes/prism-tomorrow.css';
 import CodeMirror from '@uiw/react-codemirror';
@@ -19,6 +19,7 @@ export
   const quickFindRef = useRef()
   const asideRef = useRef()
   const noteNameRef = useRef()
+  const createNoteRef = useRef()
 
   const fetchLocalStorage = () => {
     var notesNames = []
@@ -36,12 +37,12 @@ export
 
 
   useEffect(() => {
+
     quickFindRef.current.addEventListener('input', function () {
       let noteListItem = document.querySelectorAll('.note-list li p')
       let quickFindLowerCase = quickFindRef.current.value.toLowerCase()
       for (let note of noteListItem) {
         let noteParent = note.parentNode
-
         if (!note.textContent.toLocaleLowerCase().includes(quickFindLowerCase)) {
           noteParent.style.display = 'none'
         } else {
@@ -49,6 +50,7 @@ export
         }
       }
     })
+
   })
 
   useEffect(() => {
@@ -79,18 +81,17 @@ export
     if (previewFieldRef.current.style.display != 'block') {
       editorFieldRef.current.style.display = 'none'
       previewFieldRef.current.style.display = 'block'
-      previewFieldRef.current.style.width = '100%'
+      previewFieldRef.current.style.width = '70%'
     } else {
       previewFieldRef.current.style.display = 'none'
       editorFieldRef.current.style.display = 'block'
-      editorFieldRef.current.style.width = '100%'
+      editorFieldRef.current.style.width = '70%'
     }
   }
 
   function split() {
     editorFieldRef.current.style.display = 'block'
     previewFieldRef.current.style.display = 'block'
-
     previewFieldRef.current.style.width = '50%'
     editorFieldRef.current.style.width = '50%'
   }
@@ -110,6 +111,8 @@ export
   function load_note(note) {
     setStorageNote(localStorage.getItem(note))
     noteNameRef.current.innerText = note
+    var rename = document.querySelector('#rename')
+    rename.value = note
   }
 
   function saveCurrentNote(currentNote) {
@@ -122,34 +125,40 @@ export
         <aside ref={asideRef}>
           <header>
             <section className="user-info">
-              <img src="" alt="" />
-              <h3>Username</h3>
-            </section>
-            <section className="quick-find">
-              <input type="text" id='quick-find' ref={quickFindRef} placeholder="Busca rápida" />
-              <span className='command-tip'>
-                <p>CTR +</p>
-                <p>F</p>
-              </span>
+              <img src="https://cdn.dribbble.com/users/8381831/avatars/normal/eb6af40c7c8968bcae225ac8c75a6bbf.png?1679945614" alt="" />
+              <h3>username</h3>
             </section>
 
-            <h3>Minhas Notas</h3>
-
-            <ul className='note-list'>
-              {
-                notes.map(note => {
-                  return <li key={note} onClick={() => load_note(note)}>
-                    <IoDocumentOutline />
-                    <p>{note}</p>
-                  </li>
-                })
-              }
-            </ul>
+            <button className='add-new'>
+              <IoAdd />
+             </button>
 
           </header>
+
+          <section className="quick-find">
+            <input type="text" id='quick-find' ref={quickFindRef} placeholder="Busca rápida" />
+            <span className='command-tip' ref={createNoteRef}>
+              <p>CTRL + F</p>
+            </span>
+          </section>
+
+          <h3>Minhas Notas</h3>
+
+          <ul className='note-list'>
+            {
+              notes.map(note => {
+                return <li key={note} onClick={() => load_note(note)}>
+                  <IoDocumentOutline />
+                  <p>{note}</p>
+                </li>
+              })
+            }
+          </ul>
+
         </aside>
         <div className="view">
           <h4 ref={noteNameRef}>file name</h4>
+          <input type="text" id='rename' />
           <section className="actions">
             <IoEyeOutline ref={eyeRef} onClick={showPreview} />
             <IoCopyOutline onClick={split} />

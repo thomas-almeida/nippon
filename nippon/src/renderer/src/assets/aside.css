@@ -1,3 +1,53 @@
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header img {
+    background-color: #3d3d3d;
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 7px #121212;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info h3 {
+    width: 100px;
+    max-width: 100px;
+    font-size: 1em;
+}
+
+.add-new {
+    padding: 10px 20px;
+    background-color: #121212;
+    box-shadow: 0px 0px 8px #181818;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #cccccc1a;
+    font-weight: 600;
+    font-size: 1.1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.add-new:hover {
+    transform: scale(1.02);
+    background-color: #ddd;
+    color: #000;
+}
+
 aside ul {
     padding: 10px 0px;
     list-style: none;
@@ -46,9 +96,14 @@ aside li {
     border-radius: 3px;
     box-shadow: 0px 0px 8px #121212;
     color: #8c8c8c;
-}
-
-.command-tip p {
     font-size: 0.85em;
     font-weight: 700;
+    cursor: default;
+}
+
+.recolor {
+    background-color: #e3e3e3;
+    color: #080808;
+    padding: 8px 10px;
+    cursor: pointer;
 }
