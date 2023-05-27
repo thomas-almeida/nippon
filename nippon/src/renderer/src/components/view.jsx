@@ -1,34 +1,15 @@
 import { IoEyeOutline, IoCopyOutline, IoBookmarkOutline } from 'react-icons/io5';
 import Editor from './MarkDownEditor';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown'
+import Prism from 'prismjs'
+import 'prismjs/themes/prism-tomorrow.css';
 
 export function View() {
 
-    const code = `## Title
-
-    \`\`\`jsx
-    function Demo() {
-      return <div>demo</div>
-    }
-    \`\`\`
-    
-    \`\`\`bash
-    # Not dependent on uiw.
-    npm install @codemirror/lang-markdown --save
-    npm install @codemirror/language-data --save
-    \`\`\`
-    
-    [weisit ulr](https://uiwjs.github.io/react-codemirror/)
-    
-    \`\`\`go
-    package main
-    import "fmt"
-    func main() {
-      fmt.Println("Hello, 世界")
-    }
-    \`\`\`
-    `;
+    useEffect(() => {
+        Prism.highlightAll()
+    })
 
     const [markdown, setMarkdown] = useState('');
 

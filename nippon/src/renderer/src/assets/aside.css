@@ -22,7 +22,7 @@ aside li {
 
 .quick-find input {
     width: 100%;
-    padding: 8px;
+    padding: 14px;
     background-color: #121212;
     box-shadow: 0px 0px 8px #121212;
     border: 1px solid #2d2d2d;
@@ -35,9 +35,9 @@ aside li {
 
 .command-tip {
     background-color: #181818;
-    padding: 3px 5px;
+    padding: 8px 10px;
     position: absolute;
-    top: 35px;
+    top: 37px;
     right: 8px;
     display: flex;
     justify-content: center;

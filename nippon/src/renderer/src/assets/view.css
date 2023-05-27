@@ -3,12 +3,12 @@
 }
 
 .actions {
-    padding: 10px;
+    padding: 7px;
     top: 15px;
     display: flex;
     background-color: #181818;
     position: absolute;
-    right: 40px;
+    right: 70px;
     border-radius: 5px;
     box-shadow: 0px 0px 4px #161616;
 }
@@ -50,6 +50,10 @@
     font-size: 1em;
 }
 
+.preview>p {
+    padding: 10px 0px;
+}
+
 .preview img {
     width: 100%;
     box-shadow: 0px 0px 8px #1c1c1c;
@@ -70,6 +74,37 @@ h3 {
 
 .preview li>ul {
     padding: 10px 20px;
+}
+
+blockquote {
+    padding: 10px;
+    border-left: 5px solid #dddddd45;
+    margin: 10px 0px;
+    background: #3c3c3c0f;
+    color: #7e7e7e;
+}
+
+pre[class*="language-"] {
+    background: #2d2d2d29 !important;
+    padding: 5px 10px !important;
+}
+
+.token.boolean,
+.token.number,
+.token.function {
+    color: #50fa7b !important;
+}
+
+.token.selector,
+.token.important,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+    color: #f46df7 !important;
+}
+
+.ͼ1a {
+    color: #f46df7;
 }
 
 .ͼ15,
