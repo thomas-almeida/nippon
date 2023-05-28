@@ -79,6 +79,25 @@ export
       }
     })
 
+
+    window.addEventListener('keydown', function (tecla) {
+      if (tecla.ctrlKey && tecla.key === 'd') {
+        split()
+      }
+    })
+
+    window.addEventListener('keydown', function (tecla) {
+      if (tecla.ctrlKey && tecla.key === 'e') {
+        showPreview()
+      }
+    })
+
+    window.addEventListener('keydown', function (tecla) {
+      if (tecla.ctrlKey && tecla.key === 'n') {
+        newNote()
+      }
+    })
+
   })
 
 
