@@ -51,15 +51,22 @@ header img {
 aside ul {
     padding: 10px 0px;
     list-style: none;
+    height: 70%;
+    overflow-y: auto;
 }
 
 aside li {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 10px 0px;
+    gap: 5px;
+    margin: 10px 5px;
     padding: 10px 0px;
     cursor: pointer;
+    line-height: 150%;
+}
+
+.only-hover {
+    display: none;
 }
 
 .quick-find {

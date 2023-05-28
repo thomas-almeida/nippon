@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 
-import { IoEyeOutline, IoDocumentOutline, IoCopyOutline, IoBookmarkOutline, IoAdd } from 'react-icons/io5';
+import { IoEyeOutline, IoDocumentOutline, IoCopyOutline, IoBookmarkOutline, IoAdd, IoCreateOutline, IoEllipsisHorizontal } from 'react-icons/io5';
 import ReactMarkdown from 'react-markdown'
 import 'prismjs/themes/prism-tomorrow.css';
 import CodeMirror from '@uiw/react-codemirror';
@@ -11,11 +11,13 @@ import { dracula } from '@uiw/codemirror-theme-dracula'
 import Prism from 'prismjs'
 
 
+
 export
   function App() {
 
-
+  const [fileName, setFileName] = useState([])
   const [notes, setNotes] = useState([])
+
   const quickFindRef = useRef()
   const asideRef = useRef()
   const noteNameRef = useRef()
@@ -110,14 +112,39 @@ export
 
   function load_note(note) {
     setStorageNote(localStorage.getItem(note))
-    noteNameRef.current.innerText = note
     var rename = document.querySelector('#rename')
     rename.value = note
+    setFileName(rename.value)
   }
 
   function saveCurrentNote(currentNote) {
-    localStorage.setItem(noteNameRef.current.innerText, currentNote)
+    var rename = document.querySelector('#rename')
+    localStorage.setItem(rename.value, currentNote)
   }
+
+  function newNote() {
+    setStorageNote('')
+    var rename = document.querySelector('#rename')
+    rename.value = 'Nova nota'
+    setFileName(rename.value)
+    localStorage.setItem('Nova nota', setStorageNote)
+  }
+
+  function renameNote(noteName) {
+
+    var rename = document.querySelector('#rename')
+
+    if (rename.readOnly) {
+      rename.removeAttribute('ReadOnly')
+    } else {
+      let noteContent = localStorage.getItem(noteName)
+      localStorage.removeItem(noteName)
+      localStorage.setItem(rename.value, noteContent)
+      rename.readOnly = true
+    }
+
+  }
+
 
   return (
     <>
@@ -129,9 +156,9 @@ export
               <h3>username</h3>
             </section>
 
-            <button className='add-new'>
+            <button className='add-new' onClick={newNote}>
               <IoAdd />
-             </button>
+            </button>
 
           </header>
 
@@ -150,6 +177,7 @@ export
                 return <li key={note} onClick={() => load_note(note)}>
                   <IoDocumentOutline />
                   <p>{note}</p>
+                  <IoEllipsisHorizontal className='only-hover' />
                 </li>
               })
             }
@@ -157,8 +185,12 @@ export
 
         </aside>
         <div className="view">
-          <h4 ref={noteNameRef}>file name</h4>
-          <input type="text" id='rename' />
+
+          <section className='file-name-field'>
+            <input type="text" id='rename' placeholder='Selecione ou Crie uma nota' readOnly />
+            <IoCreateOutline onClick={() => renameNote(fileName)} />
+          </section>
+
           <section className="actions">
             <IoEyeOutline ref={eyeRef} onClick={showPreview} />
             <IoCopyOutline onClick={split} />

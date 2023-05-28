@@ -7,6 +7,31 @@
     margin-top: 10px;
 }
 
+.file-name-field {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-name-field svg {
+    font-size: 1.4em;
+    margin-bottom: 4px;
+    margin-right: 85px;
+    cursor: pointer;
+}
+
+#rename {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 1.1em;
+    outline: none;
+    width: 230px;
+    text-align: center;
+}
+
 .actions {
     padding: 7px;
     top: 15px;
@@ -75,7 +100,8 @@
 
 .preview h1,
 h2,
-h3 {
+h3,
+h4 {
     padding: 10px 0px;
 }
 
@@ -171,7 +197,7 @@ pre[class*="language-"] {
 .ͼ4 .cm-line {
     letter-spacing: 0.9px;
     font-family: 'Roboto Mono', monospace;
-    color: #949494;
+    color: #c1c1c1;
     white-space: break-spaces;
 }
 
@@ -189,14 +215,14 @@ pre[class*="language-"] {
 
 /* Track */
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: transparent;
 }
 
 
 /* Handle */
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: #303030;
     border-radius: 4px;
 }
@@ -204,6 +230,6 @@ pre[class*="language-"] {
 
 /* Handle on hover */
 
- ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #333333;
 }
