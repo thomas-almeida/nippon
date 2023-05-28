@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 
-import { IoEyeOutline, IoDocumentOutline, IoCopyOutline, IoBookmarkOutline, IoAdd, IoCreateOutline, IoEllipsisHorizontal } from 'react-icons/io5';
+import { IoEyeOutline, IoDocumentOutline, IoCopyOutline, IoBookmarkOutline, IoAdd, IoCreateOutline, IoEllipsisHorizontal, IoTrashOutline } from 'react-icons/io5';
 import ReactMarkdown from 'react-markdown'
 import 'prismjs/themes/prism-tomorrow.css';
 import CodeMirror from '@uiw/react-codemirror';
@@ -66,6 +66,16 @@ export
     window.addEventListener('keydown', function (tecla) {
       if (tecla.ctrlKey && tecla.key === 's') {
         saveCurrentNote(markdownlocal)
+
+        let notify = this.document.querySelector('#notify')
+        notify.style.display = 'block'
+        notify.innerText = 'Nota Salva ✅'
+
+        let showNotify = setInterval(function () {
+          notify.style.display = 'none'
+          clearInterval(showNotify)
+        }, 2000)
+
       }
     })
 
@@ -120,6 +130,16 @@ export
   function saveCurrentNote(currentNote) {
     var rename = document.querySelector('#rename')
     localStorage.setItem(rename.value, currentNote)
+
+    let notify = document.querySelector('#notify')
+    notify.style.display = 'block'
+    notify.innerText = 'Nota Salva ✅'
+
+    let showNotify = setInterval(function () {
+      notify.style.display = 'none'
+      clearInterval(showNotify)
+    }, 2000)
+
   }
 
   function newNote() {
@@ -141,10 +161,60 @@ export
       localStorage.removeItem(noteName)
       localStorage.setItem(rename.value, noteContent)
       rename.readOnly = true
+
+      let notify = document.querySelector('#notify')
+      notify.style.display = 'block'
+      notify.innerText = 'Nota Renomeada 📝'
+
+      let showNotify = setInterval(function () {
+        notify.style.display = 'none'
+        clearInterval(showNotify)
+      }, 2000)
+
     }
 
   }
 
+  function openOption(noteName) {
+
+    let note_to_delete = document.querySelector('#note-to-delete')
+    note_to_delete.innerText = noteName
+
+    let options = document.querySelector('#mouse-option')
+
+    if (event.target.closest('li')) {
+      options.style.display = 'flex'
+      options.style.left = event.clientX + 'px'
+      options.style.top = event.clientY + 'px'
+    } else {
+      options.style.display = 'none'
+    }
+
+    document.addEventListener('click', function (event) {
+      const liElement = event.target.closest('li'); // Verifica o elemento <li> mais próximo
+
+      if (!liElement) {
+        // Se o clique foi em qualquer outro lugar além da <li>, esconda a mini div
+        options.style.display = 'none';
+      }
+    });
+
+  }
+
+  function removeNote() {
+    let note_to_delete = document.querySelector('#note-to-delete')
+    localStorage.removeItem(note_to_delete.innerText)
+
+    let notify = document.querySelector('#notify')
+    notify.style.display = 'block'
+    notify.innerText = 'Nota Excluída 💡'
+
+    let showNotify = setInterval(function () {
+      notify.style.display = 'none'
+      clearInterval(showNotify)
+    }, 2000)
+
+  }
 
   return (
     <>
@@ -174,17 +244,32 @@ export
           <ul className='note-list'>
             {
               notes.map(note => {
-                return <li key={note} onClick={() => load_note(note)}>
-                  <IoDocumentOutline />
-                  <p>{note}</p>
-                  <IoEllipsisHorizontal className='only-hover' />
-                </li>
+                return (
+                  <>
+                    <li key={note} onClick={() => load_note(note)} onContextMenu={() => openOption(note)}>
+                      <IoDocumentOutline />
+                      <p>{note}</p>
+                    </li>
+
+                  </>
+                )
+
               })
             }
           </ul>
 
+          <div className='options' id='mouse-option' onClick={removeNote}>
+            <p id='note-to-delete'></p>
+            <p>Deletar</p>
+            <IoTrashOutline />
+          </div>
+
         </aside>
         <div className="view">
+
+          <div className='notify' id='notify'>
+            <p>Notificação Sucesso</p>
+          </div>
 
           <section className='file-name-field'>
             <input type="text" id='rename' placeholder='Selecione ou Crie uma nota' readOnly />
