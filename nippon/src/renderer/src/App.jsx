@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 
-import { IoEyeOutline, IoDocumentOutline, IoCopyOutline, IoBookmarkOutline, IoAdd, IoCreateOutline, IoEllipsisHorizontal, IoTrashOutline } from 'react-icons/io5';
+import { IoEyeOutline, IoDocumentOutline, IoCopyOutline, IoBookmarkOutline, IoAdd, IoCreateOutline, IoTrashOutline, IoSettingsOutline, IoCloseOutline } from 'react-icons/io5';
 import ReactMarkdown from 'react-markdown'
 import 'prismjs/themes/prism-tomorrow.css';
 import CodeMirror from '@uiw/react-codemirror';
@@ -20,6 +20,8 @@ export
   const asideRef = useRef()
   const noteNameRef = useRef()
   const createNoteRef = useRef()
+  const configScreenRef = useRef()
+
 
   const fetchLocalStorage = () => {
     var notesNames = []
@@ -256,8 +258,73 @@ export
 
   }
 
+  function notify() {
+
+    let notify = document.querySelector('#notify')
+    notify.style.display = 'block'
+    notify.innerText = 'Nota Excluída 💡'
+
+    let showNotify = setInterval(function () {
+      notify.style.display = 'none'
+      clearInterval(showNotify)
+    }, 2000)
+  }
+
+  function openConfig() {
+    configScreenRef.current.style.display = 'flex'
+  }
+
+  function closeConfigs() {
+    configScreenRef.current.style.display = 'none'
+  }
+
   return (
     <>
+
+    
+<div className='config-container' id='config-screen' ref={configScreenRef}>
+        <div className='config-content'>
+
+          <div className='configs'>
+            <IoCloseOutline id='close-btn' onClick={closeConfigs} />
+            <h2>Configurações</h2>
+            <div>
+              <section className='config-options flex'>
+                <h3>Modo de Cor</h3>
+                <select name="color-mode" id="color-mode-select">
+                  <option value="Escuro">Escuro</option>
+                  <option value="Claro">Claro</option>
+                </select>
+              </section>
+              <section className='config-options'>
+                <h3>Avatares</h3>
+                <section className='avatar-grid'>
+                  <img src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
+                  <img src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
+                  <img src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
+                  <img src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
+                </section>
+              </section>
+
+              <section className='config-options'>
+                <h3>Nome de Usuário</h3>
+                <input type="text" id='txt-username' placeholder='Novo nome de usuario' />
+                <IoCreateOutline id='edit-username' />
+              </section>
+
+              <section className='config-options'>
+                <h3>Exportar Notas</h3>
+                <p>Quando uma nova versão sair, importe as notas existentes para não perder suas anotações</p>
+                <button>Exportar Minhas Notas</button>
+              </section>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <main>
         <aside ref={asideRef}>
           <header>
@@ -311,6 +378,8 @@ export
             <p>Notificação Sucesso</p>
           </div>
 
+          <IoSettingsOutline id='config' onClick={openConfig} />
+
           <section className='file-name-field'>
             <input type="text" id='rename' placeholder='Selecione ou Crie uma nota' readOnly />
             <IoCreateOutline onClick={() => renameNote(fileName)} />
@@ -321,6 +390,7 @@ export
             <IoCopyOutline onClick={split} />
             <IoBookmarkOutline onClick={() => saveCurrentNote(markdownlocal)} />
           </section>
+
           <div className="editor-preview">
             <div className='editor' ref={editorFieldRef}>
 
@@ -337,8 +407,12 @@ export
           </div>
         </div>
       </main>
+
+
     </>
   )
 }
+
+
 
 export default App

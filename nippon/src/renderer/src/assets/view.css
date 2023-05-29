@@ -13,6 +13,14 @@
     display: none;
 }
 
+#success {
+    box-shadow: 0px 0px 8px #29ae00;
+}
+
+#warning {
+    box-shadow: 0px 0px 8px #f3dc0f;
+}
+
 .view {
     position: relative;
 }
@@ -47,8 +55,20 @@
     text-align: center;
 }
 
+#config {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    font-size: 1.4em;
+    cursor: pointer;
+    box-shadow: 0px 0px 4px #161616;
+    background-color: #181818;
+    padding: 8px;
+    border-radius: 3px;
+}
+
 .actions {
-    padding: 7px;
+    padding: 4px;
     top: 15px;
     display: flex;
     background-color: #181818;
