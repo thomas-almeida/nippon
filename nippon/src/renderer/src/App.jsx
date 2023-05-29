@@ -10,8 +10,6 @@ import { languages } from '@codemirror/language-data';
 import { dracula } from '@uiw/codemirror-theme-dracula'
 import Prism from 'prismjs'
 
-
-
 export
   function App() {
 
@@ -53,7 +51,7 @@ export
       }
     })
 
-  })
+  }, [])
 
   useEffect(() => {
 
@@ -66,16 +64,6 @@ export
     window.addEventListener('keydown', function (tecla) {
       if (tecla.ctrlKey && tecla.key === 's') {
         saveCurrentNote(markdownlocal)
-
-        let notify = this.document.querySelector('#notify')
-        notify.style.display = 'block'
-        notify.innerText = 'Nota Salva ✅'
-
-        let showNotify = setInterval(function () {
-          notify.style.display = 'none'
-          clearInterval(showNotify)
-        }, 2000)
-
       }
     })
 
@@ -86,11 +74,7 @@ export
       }
     })
 
-    window.addEventListener('keydown', function (tecla) {
-      if (tecla.ctrlKey && tecla.key === 'e') {
-        showPreview()
-      }
-    })
+
 
     window.addEventListener('keydown', function (tecla) {
       if (tecla.ctrlKey && tecla.key === 'n') {
@@ -101,7 +85,13 @@ export
   })
 
 
-
+  useEffect(() => {
+    window.addEventListener('keydown', function (tecla) {
+      if (tecla.ctrlKey && tecla.key === 'e') {
+        showPreview()
+      }
+    })
+  }, [])
 
   const editorFieldRef = useRef()
   const previewFieldRef = useRef()
@@ -141,6 +131,7 @@ export
 
   function load_note(note) {
     setStorageNote(localStorage.getItem(note))
+    setMarkdown(localStorage.getItem(note))
     var rename = document.querySelector('#rename')
     rename.value = note
     setFileName(rename.value)
@@ -148,16 +139,32 @@ export
 
   function saveCurrentNote(currentNote) {
     var rename = document.querySelector('#rename')
-    localStorage.setItem(rename.value, currentNote)
 
-    let notify = document.querySelector('#notify')
-    notify.style.display = 'block'
-    notify.innerText = 'Nota Salva ✅'
+    if (rename.value === '') {
 
-    let showNotify = setInterval(function () {
-      notify.style.display = 'none'
-      clearInterval(showNotify)
-    }, 2000)
+      let notify = document.querySelector('#notify')
+      notify.style.display = 'block'
+      notify.innerText = 'Nota sem nome ⛔'
+
+      let showNotify = setInterval(function () {
+        notify.style.display = 'none'
+        clearInterval(showNotify)
+      }, 2000)
+
+    } else {
+
+      localStorage.setItem(rename.value, currentNote)
+
+      let notify = document.querySelector('#notify')
+      notify.style.display = 'block'
+      notify.innerText = 'Nota Salva ✅'
+
+      let showNotify = setInterval(function () {
+        notify.style.display = 'none'
+        clearInterval(showNotify)
+      }, 2000)
+
+    }
 
   }
 
@@ -176,20 +183,34 @@ export
     if (rename.readOnly) {
       rename.removeAttribute('ReadOnly')
     } else {
-      let noteContent = localStorage.getItem(noteName)
-      localStorage.removeItem(noteName)
-      localStorage.setItem(rename.value, noteContent)
-      rename.readOnly = true
+      if (rename.value === '') {
 
-      let notify = document.querySelector('#notify')
-      notify.style.display = 'block'
-      notify.innerText = 'Nota Renomeada 📝'
+        let notify = document.querySelector('#notify')
+        notify.style.display = 'block'
+        notify.innerText = 'Nota sem nome ⛔'
 
-      let showNotify = setInterval(function () {
-        notify.style.display = 'none'
-        clearInterval(showNotify)
-      }, 2000)
+        let showNotify = setInterval(function () {
+          notify.style.display = 'none'
+          clearInterval(showNotify)
+        }, 2000)
 
+      } else {
+
+        let noteContent = localStorage.getItem(noteName)
+        localStorage.removeItem(noteName)
+        localStorage.setItem(rename.value, noteContent)
+        rename.readOnly = true
+
+        let notify = document.querySelector('#notify')
+        notify.style.display = 'block'
+        notify.innerText = 'Nota Renomeada 📝'
+
+        let showNotify = setInterval(function () {
+          notify.style.display = 'none'
+          clearInterval(showNotify)
+        }, 2000)
+
+      }
     }
 
   }
@@ -241,8 +262,8 @@ export
         <aside ref={asideRef}>
           <header>
             <section className="user-info">
-              <img src="https://cdn.dribbble.com/users/8381831/avatars/normal/eb6af40c7c8968bcae225ac8c75a6bbf.png?1679945614" alt="" />
-              <h3>username</h3>
+              <img src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
+              <h3>nippon 🍥</h3>
             </section>
 
             <button className='add-new' onClick={newNote}>
