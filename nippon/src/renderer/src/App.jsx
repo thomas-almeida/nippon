@@ -9,9 +9,11 @@ import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { languages } from '@codemirror/language-data';
 import { dracula } from '@uiw/codemirror-theme-dracula'
 import Prism from 'prismjs'
+import chimpers from './components/chimpers'
 
 export
   function App() {
+
 
   const [fileName, setFileName] = useState([])
   const [notes, setNotes] = useState([])
@@ -21,7 +23,8 @@ export
   const noteNameRef = useRef()
   const createNoteRef = useRef()
   const configScreenRef = useRef()
-
+  const txtUsernameRef = useRef()
+  const usernameRef = useRef()
 
   const fetchLocalStorage = () => {
     var notesNames = []
@@ -278,44 +281,101 @@ export
     configScreenRef.current.style.display = 'none'
   }
 
+
+  function changeUserImage(chimperID) {
+    let userImg = document.querySelector('#user-img')
+    userImg.src = chimpers[chimperID]
+  }
+
+  function editUsername() {
+    if (txtUsernameRef.current.value == '') {
+      console.log('nao pode vazio')
+    } else {
+      usernameRef.current.innerText = txtUsernameRef.current.value
+    }
+  }
+
+
+  function exportNotes() {
+    let backupNotes = []
+    let noteKeys = []
+
+    for (let i = 0; i < localStorage.length; i++) {
+
+      noteKeys.push(localStorage.key(i))
+
+      let noteObject = []
+      noteObject.push(noteKeys[i])
+      noteObject.push(localStorage.getItem(noteKeys[i]))
+
+      backupNotes.push(noteObject)
+
+    }
+
+    let jsonBackupFile = JSON.stringify(backupNotes)
+
+    let blob = new Blob([jsonBackupFile], { type: 'application/json' })
+    let url = URL.createObjectURL(blob)
+    let download = document.createElement('a')
+    download.href = url
+    download.download = 'nippon-backup.json'
+
+    download.click()
+
+    URL.revokeObjectURL(url)
+
+  }
+
+  useEffect(() => {
+    editorFieldRef.current.addEventListener('scroll', function () {
+      previewFieldRef.current.scrollTop = editorFieldRef.current.scrollTop
+    })
+  }, [])
+
   return (
     <>
 
-    
-<div className='config-container' id='config-screen' ref={configScreenRef}>
+
+
+      <div className='config-container' id='config-screen' ref={configScreenRef}>
         <div className='config-content'>
 
           <div className='configs'>
             <IoCloseOutline id='close-btn' onClick={closeConfigs} />
             <h2>Configurações</h2>
             <div>
-              <section className='config-options flex'>
-                <h3>Modo de Cor</h3>
-                <select name="color-mode" id="color-mode-select">
-                  <option value="Escuro">Escuro</option>
-                  <option value="Claro">Claro</option>
-                </select>
+              <section className='config-options'>
+                <h1>Nippon 🍥 </h1>
+
+                <p>Editor de notas em Markdown.</p>
+                <p>Esta versão é uma fase de testes em sua usabilidade e não representa o produto e proposta final deste software. </p>
+
+                <i>ver. 0.0.1</i>
               </section>
               <section className='config-options'>
-                <h3>Avatares</h3>
+                <h3>Chimpers</h3>
                 <section className='avatar-grid'>
-                  <img src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
-                  <img src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
-                  <img src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
-                  <img src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
+                  <img onClick={() => changeUserImage(0)} src={chimpers[0]} alt="" />
+                  <img onClick={() => changeUserImage(1)} src={chimpers[1]} alt="" />
+                  <img onClick={() => changeUserImage(2)} src={chimpers[2]} alt="" />
+                  <img onClick={() => changeUserImage(3)} src={chimpers[3]} alt="" />
+                  <img onClick={() => changeUserImage(4)} src={chimpers[4]} alt="" />
+                  <img onClick={() => changeUserImage(5)} src={chimpers[5]} alt="" />
+                  <img onClick={() => changeUserImage(6)} src={chimpers[6]} alt="" />
+                  <img onClick={() => changeUserImage(7)} src={chimpers[7]} alt="" />
                 </section>
               </section>
 
               <section className='config-options'>
                 <h3>Nome de Usuário</h3>
-                <input type="text" id='txt-username' placeholder='Novo nome de usuario' />
-                <IoCreateOutline id='edit-username' />
+                <input type="text" ref={txtUsernameRef} id='txt-username' placeholder='Novo nome de usuario' />
+                <IoCreateOutline id='edit-username' onClick={editUsername} />
               </section>
 
               <section className='config-options'>
                 <h3>Exportar Notas</h3>
-                <p>Quando uma nova versão sair, importe as notas existentes para não perder suas anotações</p>
-                <button>Exportar Minhas Notas</button>
+                <p>Quando uma nova versão sair, importe as notas existentes para não perder suas anotações desta versão.</p>
+                <button onClick={exportNotes}>Fazer Backup</button>
               </section>
 
 
@@ -329,8 +389,8 @@ export
         <aside ref={asideRef}>
           <header>
             <section className="user-info">
-              <img src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
-              <h3>nippon 🍥</h3>
+              <img id='user-img' src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
+              <h3 ref={usernameRef}>nippon 🍥</h3>
             </section>
 
             <button className='add-new' onClick={newNote}>
