@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
   title: 'Nippon 🍥 - Crie Notas em Markdown em Segundos',
@@ -13,7 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
