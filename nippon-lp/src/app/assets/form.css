@@ -94,6 +94,7 @@ input[type="submit"]:hover,
     background-color: #009326;
     padding: 3px 4px;
     border-radius: 3px;
+    margin-left: 10px;
 }
 
 .pix-container {
