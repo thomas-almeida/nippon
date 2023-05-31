@@ -1,0 +1,16 @@
+article {
+    margin-top: 50px;
+    padding: 10px;
+}
+
+article p {
+    padding: 10px 10%;
+    margin: 10px 0px;
+    font-size: 17px;
+    line-height: 28px;
+}
+
+article ul {
+    padding: 10px;
+    margin-left: 10px;
+}

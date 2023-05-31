@@ -1,0 +1,30 @@
+nav {
+    box-shadow: 1px 1px 8px #121212;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+nav ul {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 12px;
+    margin-right: 10px;
+}
+
+.left-anchor {
+    position: absolute;
+    left: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    color: #DC586B;
+}
