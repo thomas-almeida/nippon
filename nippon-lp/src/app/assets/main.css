@@ -3,6 +3,7 @@
 @import url(home.css);
 @import url(form.css);
 @import url(article.css);
+@import url(resposive.css);
 * {
     margin: 0;
     padding: 0;

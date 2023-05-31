@@ -7,17 +7,34 @@ import { useRef } from "react";
 
 export default function Home() {
 
+  const pixCodeRef = useRef<HTMLParagraphElement>(null)
   const pixContainerRef = useRef<HTMLDivElement>(null)
+  const copyCodeRef = useRef<HTMLButtonElement>(null)
 
   function closePix() {
-    if (pixContainerRef.current) {
+    if (pixContainerRef.current && copyCodeRef.current && pixCodeRef.current) {
       pixContainerRef.current.style.display = 'none'
+      copyCodeRef.current.innerText = 'Copiar'
+      pixCodeRef.current.style.backgroundColor = '#161616'
     }
   }
 
   function openPix() {
     if (pixContainerRef.current) {
       pixContainerRef.current.style.display = 'flex'
+    }
+  }
+
+  function copyCode() {
+    if (pixCodeRef.current) {
+      const pixCode = pixCodeRef.current.innerText
+      navigator.clipboard.writeText(pixCode)
+        .then(() => {
+          if (pixCodeRef.current && copyCodeRef.current) {
+            pixCodeRef.current.style.backgroundColor = 'rgb(3 193 0 / 16%)'
+            copyCodeRef.current.innerText = 'Código Copiado!'
+          }
+        })
     }
   }
 
@@ -55,10 +72,11 @@ export default function Home() {
               <img src="/qrcode-pix.png" alt="" />
 
               <p>Ou Copie o Código QR</p>
-              <p id="pix-code">
+              <p id="pix-code" ref={pixCodeRef}>
                 00020126330014BR.GOV.BCB.PIX01115078059881452040000530398654045.005802BR5924THOMAS ALMEIDA RODRIGUES6009Sao Paulo62150511NIPPONAPOIO63041AE1
               </p>
 
+              <button className="contribute-btn copy" ref={copyCodeRef} onClick={copyCode}>Copiar</button>
               <button className="cancel-btn" onClick={closePix}>Fechar</button>
 
             </div>
