@@ -230,9 +230,8 @@ pre[class*="language-"] {
 }
 
 .ͼ4 .cm-line {
-    letter-spacing: 0.9px;
     font-family: 'Roboto Mono', monospace;
-    color: #c1c1c1;
+    color: #ffffff;
     white-space: break-spaces;
 }
 

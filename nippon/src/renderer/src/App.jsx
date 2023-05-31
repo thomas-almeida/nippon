@@ -10,6 +10,7 @@ import { languages } from '@codemirror/language-data';
 import { dracula } from '@uiw/codemirror-theme-dracula'
 import Prism from 'prismjs'
 import chimpers from './components/chimpers'
+import db from './components/userDb';
 
 export
   function App() {
@@ -285,6 +286,7 @@ export
   function changeUserImage(chimperID) {
     let userImg = document.querySelector('#user-img')
     userImg.src = chimpers[chimperID]
+    db.users.update(1, { profile: userImg.src })
   }
 
   function editUsername() {
@@ -292,6 +294,7 @@ export
       console.log('nao pode vazio')
     } else {
       usernameRef.current.innerText = txtUsernameRef.current.value
+      db.users.update(1, { name: usernameRef.current.innerText })
     }
   }
 
@@ -332,6 +335,16 @@ export
     })
   }, [])
 
+  const [username, setUsername] = useState([])
+
+  useEffect(() => {
+    db.users.get(1).then((user) => {
+      if (user) {
+        setUsername([user.name, user.profile]);
+      }
+    });
+  }, []);
+
   return (
     <>
 
@@ -350,7 +363,7 @@ export
                 <p>Editor de notas em Markdown.</p>
                 <p>Esta versão é uma fase de testes em sua usabilidade e não representa o produto e proposta final deste software. </p>
 
-                <i>ver. 0.0.1</i>
+                <i>ver. a.0.0.1</i>
               </section>
               <section className='config-options'>
                 <h3>Chimpers</h3>
@@ -389,8 +402,8 @@ export
         <aside ref={asideRef}>
           <header>
             <section className="user-info">
-              <img id='user-img' src="https://public.nftstatic.com/static/nft/webp/nft-cex/S3/1670005026631_0me2vqk7fqy4hujdwj0q1gr4ydpmkhv7_600x600.webp" alt="" />
-              <h3 ref={usernameRef}>nippon 🍥</h3>
+              <img id='user-img' src={username[1]} alt="" />
+              <h3 ref={usernameRef}>{username[0]}</h3>
             </section>
 
             <button className='add-new' onClick={newNote}>
