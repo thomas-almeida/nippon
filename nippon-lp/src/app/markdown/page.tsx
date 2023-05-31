@@ -28,7 +28,23 @@ export default function Home() {
             </p>
 
             <p>
-              
+
+              Alguns exemplos de como escrever Notas em MD:
+
+              <ul>
+                <li>#: <h3>Títulos</h3></li>
+                <li>****: <b>Negrito</b></li>
+                <li>**: <i>Itálico</i></li>
+                <li> + : Listas</li>
+                <li>[Clique Aqui](https://Nippon): Links</li>
+                <li>![Nippon Logo](https://Nippon): Imagens (sim, vc precisa do link delas)</li>
+              </ul>
+
+
+            </p>
+
+            <p>
+
               Atalhos do teclado que otimizam a experiência de escrever notas e documentações com o  Nippon 🍥 :
 
               <ul>
