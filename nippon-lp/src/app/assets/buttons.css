@@ -10,7 +10,7 @@
 .button-download {
     background: #121212;
     color: #fff;
-    border: 1px solid transparent;
+    border: 1px solid #ccc;
     display: flex;
     justify-content: center;
     align-items: center;

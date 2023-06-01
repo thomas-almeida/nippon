@@ -53,7 +53,17 @@ export default function Home() {
             </p>
 
             <p>
-              <br />
+              Contribuindo com o Nippon você ganha acesso á:
+              <ul>
+                <li>🟣 Cargo no Discord de Apoiador</li>
+                <li>📰 Notas das atualizações que estão por vir</li>
+                <li>💡 Canal aberto para dar sugestões e feedbacks</li>
+                <li>📷 Foto na Home do Site</li>
+              </ul>
+              Para ganhar o acesso a estes conteúdos basta enviar seu instagram na mensagem do PIX, que entrarei em contato com você.
+            </p>
+
+            <p>
               Thomas Almeida.
               <br />
               <i>Desenvolvedor do Nippon.</i>
