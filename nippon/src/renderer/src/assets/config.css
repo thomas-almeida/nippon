@@ -18,7 +18,7 @@
     background-color: #181818;
     border-radius: 3px;
     box-shadow: 0px 0px 8px #030303;
-    width: 40%;
+    width: 70%;
 }
 
 .configs>div {
@@ -38,7 +38,7 @@
 
 .avatar-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     padding: 20px 0px;
     gap: 5px;
 }
@@ -70,12 +70,12 @@
     color: #bdbdbd;
     border: 1px solid #a0a0a0;
     font-size: 1em;
-    margin-top: 10px;
     border-radius: 3px;
     cursor: pointer;
     transition: 0.3s;
     font-weight: 600;
     box-shadow: 0px 0px 8px #121212;
+    margin-right: 10px;
 }
 
 .config-content button:hover {
@@ -129,6 +129,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    align-items: center;
 }
 
 .config-content select {
@@ -148,4 +149,11 @@
 
 option {
     background-color: #181818;
+}
+
+#importNote {
+    width: 45% !important;
+    padding: 10px;
+    margin: 0;
+    cursor: pointer;
 }

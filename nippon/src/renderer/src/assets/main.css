@@ -26,6 +26,18 @@ aside {
     padding: 15px;
 }
 
+.flex {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.flex section {
+    width: 50%;
+    text-align: center;
+}
+
 .view {
     width: 85%;
     padding: 20px;
