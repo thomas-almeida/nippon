@@ -18,6 +18,7 @@ export
 
   const [fileName, setFileName] = useState([])
   const [notes, setNotes] = useState([])
+  const [username, setUsername] = useState([])
 
   const quickFindRef = useRef()
   const asideRef = useRef()
@@ -26,6 +27,17 @@ export
   const configScreenRef = useRef()
   const txtUsernameRef = useRef()
   const usernameRef = useRef()
+  const importNotesRef = useRef()
+
+
+  useEffect(() => {
+    db.users.toArray().then(function (users) {
+      for (var i = 0; i < users.length; i++) {
+        setUsername([users[i].name, users[i].profile])
+      }
+    })
+
+  }, []);
 
   const fetchLocalStorage = () => {
     var notesNames = []
@@ -237,10 +249,8 @@ export
     }
 
     document.addEventListener('click', function (event) {
-      const liElement = event.target.closest('li'); // Verifica o elemento <li> mais próximo
-
+      const liElement = event.target.closest('li');
       if (!liElement) {
-        // Se o clique foi em qualquer outro lugar além da <li>, esconda a mini div
         options.style.display = 'none';
       }
     });
@@ -283,21 +293,19 @@ export
   }
 
 
-  function changeUserImage(chimperID) {
+  function changeUserImage(chimperSrc) {
     let userImg = document.querySelector('#user-img')
-    userImg.src = chimpers[chimperID]
+    userImg.src = chimperSrc
     db.users.update(1, { profile: userImg.src })
   }
 
   function editUsername() {
     if (txtUsernameRef.current.value == '') {
-      console.log('nao pode vazio')
     } else {
       usernameRef.current.innerText = txtUsernameRef.current.value
       db.users.update(1, { name: usernameRef.current.innerText })
     }
   }
-
 
   function exportNotes() {
     let backupNotes = []
@@ -329,26 +337,33 @@ export
 
   }
 
+  const handleImportNotes = (event) => {
+    const file = event.target.files[0]
+    const reader = new FileReader()
+
+    reader.onload = (e) => {
+      const fileContent = e.target.result
+      const importedNotes = JSON.parse(fileContent)
+
+      for (let i = 0; i < importedNotes.length; i++) {
+        localStorage.setItem(importedNotes[i][0], importedNotes[i][1])
+      }
+
+      event.target.value = null
+    }
+
+    reader.readAsText(file)
+
+  }
+
   useEffect(() => {
     editorFieldRef.current.addEventListener('scroll', function () {
       previewFieldRef.current.scrollTop = editorFieldRef.current.scrollTop
     })
   }, [])
 
-  const [username, setUsername] = useState([])
-
-  useEffect(() => {
-    db.users.get(1).then((user) => {
-      if (user) {
-        setUsername([user.name, user.profile]);
-      }
-    });
-  }, []);
-
   return (
     <>
-
-
 
       <div className='config-container' id='config-screen' ref={configScreenRef}>
         <div className='config-content'>
@@ -363,19 +378,22 @@ export
                 <p>Editor de notas em Markdown.</p>
                 <p>Esta versão é uma fase de testes em sua usabilidade e não representa o produto e proposta final deste software. </p>
 
-                <i>ver. a.0.0.1</i>
+                <i>ver. b.0.1.2</i>
               </section>
               <section className='config-options'>
                 <h3>Chimpers</h3>
                 <section className='avatar-grid'>
-                  <img onClick={() => changeUserImage(0)} src={chimpers[0]} alt="" />
-                  <img onClick={() => changeUserImage(1)} src={chimpers[1]} alt="" />
-                  <img onClick={() => changeUserImage(2)} src={chimpers[2]} alt="" />
-                  <img onClick={() => changeUserImage(3)} src={chimpers[3]} alt="" />
-                  <img onClick={() => changeUserImage(4)} src={chimpers[4]} alt="" />
-                  <img onClick={() => changeUserImage(5)} src={chimpers[5]} alt="" />
-                  <img onClick={() => changeUserImage(6)} src={chimpers[6]} alt="" />
-                  <img onClick={() => changeUserImage(7)} src={chimpers[7]} alt="" />
+                  {
+                    chimpers.map(chimper => {
+                      return (
+                        <img
+                          key={chimper}
+                          src={chimper}
+                          onClick={() => changeUserImage(chimper)}
+                        />
+                      )
+                    })
+                  }
                 </section>
               </section>
 
@@ -386,11 +404,14 @@ export
               </section>
 
               <section className='config-options'>
-                <h3>Exportar Notas</h3>
+                <h3>Exportar / Importar Notas</h3>
                 <p>Quando uma nova versão sair, importe as notas existentes para não perder suas anotações desta versão.</p>
-                <button onClick={exportNotes}>Fazer Backup</button>
+                <section className='flex'>
+                  <button onClick={exportNotes}>Fazer Backup</button>
+                  <b>Ou</b>
+                  <input type="file" id='importNote' ref={importNotesRef} onChange={handleImportNotes} />
+                </section>
               </section>
-
 
             </div>
           </div>
@@ -426,7 +447,12 @@ export
               notes.map(note => {
                 return (
                   <>
-                    <li key={note} onClick={() => load_note(note)} onContextMenu={() => openOption(note)}>
+                    <li
+
+                      key={note}
+                      onClick={() => load_note(note)}
+                      onContextMenu={() => openOption(note)}>
+
                       <IoDocumentOutline />
                       <p>{note}</p>
                     </li>
