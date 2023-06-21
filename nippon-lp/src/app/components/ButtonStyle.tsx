@@ -2,7 +2,8 @@
 type ButtonProps = {
     platformImg: string,
     system: string | null,
-    platform: string
+    platform: string,
+    href: string
 }
 
 
@@ -12,7 +13,7 @@ export default function ButtonStyle(props: ButtonProps) {
     }
 
     return (
-        <a href="/nippon.exe" download>
+        <a href={props.href} download>
             <button className="button-download" onClick={() => openForm(props.platform)}>
                 <img src={props.platformImg} alt="donwload" />
                 <p>{props.system}</p>

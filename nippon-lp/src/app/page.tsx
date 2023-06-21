@@ -30,7 +30,8 @@ export default function Home() {
 
           </header>
           <div className="download-buttons">
-            <ButtonStyle platformImg="/logo-windows-1.png" system="Baixar para Windows - v.0.0.1" platform={"windows"} />
+            <ButtonStyle href="/nippon.exe" platformImg="/logo-windows-1.png" system="Baixar para Windows - v.0.0.1" platform={"windows"} />
+            <ButtonStyle href="/linux-unpacked" platformImg="/logo-linux-1.png" system="Baixar para Linux - v.0.0.1" platform={"linux"} />
           </div>
           <div className="img-field">
             <img id="screenshot" src="/nippon-screen.png" alt="screenshot" />
