@@ -40,4 +40,5 @@
 .button-download p {
     position: relative;
     top: 2px;
+    cursor: pointer;
 }

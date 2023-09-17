@@ -11,7 +11,7 @@ nav ul {
     display: flex;
     justify-content: end;
     align-items: center;
-    gap: 12px;
+    gap: 30px;
     margin-right: 10px;
 }
 
@@ -27,4 +27,8 @@ a {
 
 a:hover {
     color: #DC586B;
+}
+
+#logo {
+    cursor: pointer;
 }
