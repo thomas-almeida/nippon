@@ -2,59 +2,91 @@
 @import url(aside.css);
 @import url(view.css);
 @import url(config.css);
+@import url(social-buttons.css);
+
 * {
-    margin: 0px;
-    padding: 0px;
-    font-family: 'Inter', sans-serif;
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
-    background-color: #121212;
-    color: #fff;
+  background-color: #121212;
+  color: #fff;
 }
 
 main {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    overflow-y: hidden;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
 }
 
 aside {
-    width: 15%;
-    background-color: #181818;
-    padding: 15px;
+  width: 15%;
+  background-color: #181818;
+  padding: 15px;
 }
 
 .flex {
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .flex section {
-    width: 50%;
-    text-align: center;
+  width: 50%;
+  text-align: center;
 }
 
 .view {
-    width: 85%;
-    padding: 20px;
+  width: 85%;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container-content {
+  width: 60%;
+  padding: 20px;
+  text-align: center;
+}
+
+.container-content h1 {
+    font-size: 4em;
+    margin: 15px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.container-content p {
+    font-weight: lighter;
+}
+
+.container-content img{
+    width: 60px;
 }
 
 @media only screen and (max-width: 1600px) {
-    .editor-preview {
-        max-width: 1200px;
-    }
+  .editor-preview {
+    max-width: 1200px;
+  }
 }
 
 @media only screen and (max-width: 1450px) {
-    .editor-preview {
-        max-width: 1000px;
-    }
+  .editor-preview {
+    max-width: 1000px;
+  }
 }
 
-#collor{
-    color: #121212;
+#collor {
+  color: #121212;
 }

@@ -1,0 +1,24 @@
+.social-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  margin: 20px;
+}
+
+.social-btn {
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  width: 90px;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 1px 1px 4px #333;
+}
+
+.social-btn:hover {
+  transform: scale(1.1);
+  border-color: crimson;
+  color: crimson;
+}

@@ -6,7 +6,7 @@ import App from './App';
 import Login from './Login';
 
 const isUserLoggedIn = () => {
-  return false;
+  return localStorage.getItem('userSocialId') ? true : false;
 };
 
 const Main = () => {
