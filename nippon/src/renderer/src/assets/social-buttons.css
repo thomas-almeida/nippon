@@ -9,9 +9,10 @@
 
 .social-btn {
   padding: 10px;
+  margin: 5px;
   border: 1px solid #eee;
   border-radius: 4px;
-  width: 90px;
+  width: 90%;
   cursor: pointer;
   transition: 0.2s;
   box-shadow: 1px 1px 4px #333;
@@ -21,4 +22,16 @@
   transform: scale(1.1);
   border-color: crimson;
   color: crimson;
+}
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.input-area input {
+  padding: 5px;
+  margin: 5px;
+  width: 100%;
 }

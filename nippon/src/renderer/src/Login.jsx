@@ -1,4 +1,4 @@
-import { IoLogoApple, IoLogoGoogle, IoLogoTwitter } from "react-icons/io5";
+import { IoLogIn } from "react-icons/io5";
 
 export default function Login() {
 
@@ -16,9 +16,14 @@ export default function Login() {
                     <h1>Nippon <img src="/logo.png" alt="" /></h1>
                     <p>Faça login e comece a documentar seus estudos</p>
                     <div className="social-buttons-container">
-                        <IoLogoGoogle className="social-btn" onClick={active} />
-                        <IoLogoApple className="social-btn" />
-                        <IoLogoTwitter className="social-btn" />
+                        <div className="input-area">
+                            <input type="text" name="" id="" />
+                            <input type="password" name="" id="" />
+                            <span className="social-btn">
+                                <b>Entrar</b>
+                                <IoLogIn className="" onClick={active} />
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

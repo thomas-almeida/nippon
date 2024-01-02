@@ -24,6 +24,7 @@
         "@phosphor-icons/react": "^2.0.9",
         "@uiw/codemirror-theme-dracula": "^4.20.2",
         "@uiw/react-codemirror": "^4.20.2",
+        "axios": "^1.6.2",
         "codemirror": "^6.0.1",
         "dexie": "^3.2.3",
         "electron-updater": "^5.3.0",
