@@ -1,8 +1,8 @@
 "use client"
 
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar"
 import '../assets/main.css'
-import { useRef } from "react";
+import { useRef } from "react"
 
 
 export default function Home() {
